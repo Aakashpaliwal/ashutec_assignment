@@ -4,9 +4,12 @@ import StarRatings from "react-star-ratings";
 import { AiOutlineLeft } from "react-icons/ai";
 
 const ProductDetail = () => {
-  const [productDetail, setProductDetail] = useState({});
+  const [productDetail, setProductDetail] = useState(
+    JSON.parse(localStorage.getItem("detailProduct"))
+  );
   const [backgroundImage, setBackgroundImage] = useState("");
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
+  const [rating, setRating] = useState(0);
 
   const history = useHistory();
   const location = useLocation();
@@ -24,6 +27,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     setBackgroundImage(`url(${productDetail.image})`);
+    setRating(+productDetail.rating);
   }, [productDetail]);
 
   return (
@@ -44,11 +48,6 @@ const ProductDetail = () => {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="img-wrapper">
-                        {/* <img
-                          class="card-img-top hover-zoom"
-                          src={productDetail.image}
-                          alt="Card image cap"
-                        /> */}
                         <figure
                           onMouseMove={handleMouseMove}
                           style={{
@@ -83,7 +82,7 @@ const ProductDetail = () => {
                             : "Out of Stock"}
                         </p>
                         <StarRatings
-                          rating={productDetail.rating}
+                          rating={rating}
                           starRatedColor="#ffd700"
                           numberOfStars={5}
                           starDimension="20px"

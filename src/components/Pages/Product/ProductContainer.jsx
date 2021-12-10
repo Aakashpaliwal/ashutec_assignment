@@ -25,6 +25,7 @@ export class ProductContainer extends Component {
         ? JSON.parse(localStorage.getItem("deleteProducts"))
         : [],
       filterShow: false,
+      filterTerm: "",
     };
     this.deleteHandler = this.deleteHandler.bind(this);
     this.categoryFilter = this.categoryFilter.bind(this);
@@ -137,24 +138,25 @@ export class ProductContainer extends Component {
   };
 
   searchHandler = (e) => {
-    let searchValue = e.target.value;
     if (e.target.value == "" || e.target.value == null) {
       this.setState({
         product: JSON.parse(localStorage.getItem("allProducts")),
       });
     } else {
-      let searchResult = this.state.product.filter((item) =>
-        item.title.toLowerCase().includes(searchValue.toLowerCase())
-      );
+      let updatedList = this.state.product;
+      updatedList = updatedList.filter(function (item) {
+        return (
+          item.title.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+        );
+      });
       this.setState({
-        product: searchResult,
+        product: updatedList,
       });
     }
   };
 
   categoryFilter = (e) => {
     let value = e.target.value;
-    // let newProductArr = [...this.state.product];
     let filterProduct = this.state.product.filter(
       (item) => item.category == value
     );
