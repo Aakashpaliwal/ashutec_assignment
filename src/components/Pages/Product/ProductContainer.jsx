@@ -337,6 +337,11 @@ export class ProductContainer extends Component {
               <div className="col-md-12">
                 <hr />
                 <div className="card-deck">
+                  {!product || (product && product.length == 0) ? (
+                    <p className="product_msg">
+                      There are no Products in the List.
+                    </p>
+                  ) : null}
                   {product &&
                     product.map((item, index) => {
                       return (

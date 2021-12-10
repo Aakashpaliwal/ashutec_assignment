@@ -95,3 +95,7 @@ figure:hover img {
   font-size: 1.4rem;
   margin-right: 5px;
 }
+.product_msg {
+  width: 100%;
+  text-align: center;
+}
