@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import SimpleReactValidator from "simple-react-validator";
-import { InStock, Rating } from "../../Data/ProductData";
+import { categories, InStock, Rating } from "../../Data/ProductData";
 
 export class EditProduct extends Component {
   constructor(props) {
@@ -56,15 +56,8 @@ export class EditProduct extends Component {
       this.props.history.push("/products");
     } else {
       this.validator.showMessages();
-      // rerender to show messages for the first time
-      // you can use the autoForceUpdate option to do this automatically`
       this.forceUpdate();
     }
-    // let value = { ...this.state.data, locations: this.state.prevLocation };
-    // console.log("value", value);
-    // localStorage.setItem("product", JSON.stringify(value));
-    // localStorage.removeItem("editProductDetail");
-    // this.props.history.push("/products");
   };
   render() {
     return (
@@ -154,7 +147,7 @@ export class EditProduct extends Component {
                         </div>
                       </div>
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                           <label for="inputPrice">Price</label>
                           <input
                             type="text"
@@ -170,7 +163,7 @@ export class EditProduct extends Component {
                             onChange={(e) => this.changeHandler(e)}
                           />
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                           <label for="inputDescription">Rating</label>
                           <br />
                           {Rating.map((item, index) => {
@@ -203,6 +196,37 @@ export class EditProduct extends Component {
                               </div>
                             );
                           })}
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="inputState">Categories</label>
+                          <select
+                            id="inputState"
+                            class="form-control"
+                            name="category"
+                            onChange={(e) => this.changeHandler(e)}
+                          >
+                            <option
+                              value={
+                                JSON.parse(
+                                  localStorage.getItem("editProductDetail")
+                                ).category
+                              }
+                            >
+                              {
+                                JSON.parse(
+                                  localStorage.getItem("editProductDetail")
+                                ).category
+                              }
+                            </option>
+                            <option disabled>------------------</option>
+                            {categories.map((item, index) => {
+                              return (
+                                <option value={item} key={index}>
+                                  {item}
+                                </option>
+                              );
+                            })}
+                          </select>
                         </div>
 
                         <div className="form-group col-md-6">

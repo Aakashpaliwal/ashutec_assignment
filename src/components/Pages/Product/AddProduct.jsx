@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import SimpleReactValidator from "simple-react-validator";
-
+import { categories } from "../../Data/ProductData";
 class AddProduct extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +10,7 @@ class AddProduct extends Component {
       price: "",
       description: "",
       rating: "",
+      category: "",
       isDisabled: true,
       locations: [],
       inStock: 1,
@@ -45,7 +46,7 @@ class AddProduct extends Component {
         title: this.state.title,
         Description: this.state.description,
         image: this.state.imgURL,
-        category: "Television",
+        category: this.state.category,
         rating: this.state.rating,
         price: this.state.price,
         locations: this.state.locations,
@@ -153,7 +154,7 @@ class AddProduct extends Component {
                     ) : null} */}
                       </div>
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                           <label for="inputPrice">Price</label>
                           <input
                             type="text"
@@ -164,7 +165,7 @@ class AddProduct extends Component {
                             placeholder="2500"
                           />
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                           <label for="inputDescription">Rating</label>
                           <br />
                           <div class="form-check form-check-inline">
@@ -232,6 +233,24 @@ class AddProduct extends Component {
                               5
                             </label>
                           </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="inputState">Categories</label>
+                          <select
+                            id="inputState"
+                            class="form-control"
+                            name="category"
+                            onChange={(e) => this.changeHandler(e)}
+                          >
+                            <option selected>Choose...</option>
+                            {categories.map((item, index) => {
+                              return (
+                                <option value={item} key={index}>
+                                  {item}
+                                </option>
+                              );
+                            })}
+                          </select>
                         </div>
 
                         <div className="form-group col-md-6">

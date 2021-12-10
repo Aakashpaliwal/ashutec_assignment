@@ -1,7 +1,5 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
-import * as IoIcons from "react-icons/io";
 
 export const SidebarData = [
   {
@@ -13,7 +11,7 @@ export const SidebarData = [
   {
     title: "Trash",
     path: "/trash",
-    icon: <FaIcons.FaCartPlus />,
+    icon: <FaIcons.FaTrashAlt />,
     cName: "nav-text",
   },
 ];
